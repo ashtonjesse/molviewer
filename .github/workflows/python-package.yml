@@ -1,0 +1,45 @@
+name: CI/CD pipeline
+
+on:
+    push:
+    branches: [ master ]
+    pull_request:
+    branches: [ master ]
+
+jobs:
+    ci-cd-pipeline:
+      runs-on: ubuntu-latest
+      steps:
+          - name: Checkout
+            uses: actions/checkout@v2
+          - name: Get changed files
+            uses: dorny/paths-filter@v2
+            id: filter
+            with:
+              list-files: shell
+              filters: |
+                py_modified:
+                  - added|modified: "./**/*.py"
+          - name: Setup Python
+            if: ${{ steps.filter.outputs.py_modified == 'true' }}
+            uses: actions/setup-python@v2
+            with:
+              python-version: 3.10.0
+              architecture: x64
+              cache: 'pip'
+          - name: Install dependencies
+            if: ${{ steps.filter.outputs.py_modified == 'true' }}
+            run: pip install -r requirements.txt
+          - name: Run flake8
+            if: ${{ steps.filter.outputs.py_modified == 'true' }}
+            run: flake8 ${{ steps.filter.outputs.py_modified_files }}
+          - name: Run pytest
+            if: ${{ steps.filter.outputs.py_modified == 'true' }}
+            run: pytest tests
+          - name: Build binary wheel and a source tarball
+            run: py -m build
+          - name: Publish distribution to Test PyPI
+            uses: py -m twine upload --repository testpypi dist/*
+            with:
+              password: ${{ secrets.test_pypi_password }}
+              repository_url: https://test.pypi.org/legacy/
