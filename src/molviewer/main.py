@@ -1,5 +1,4 @@
-import classes
+from molecules import Macromolecule
 
-def add_one(number):
-    return number + 1
+Macromolecule(pdbid="6LU7")
 
