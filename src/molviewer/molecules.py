@@ -1,48 +1,40 @@
+import requests
+import nglview
 from chembl_webresource_client.new_client import new_client
 from rdkit import Chem
 from rdkit.Chem import AllChem
-from Bio.PDB import PDBList
-
 from typing import Union, List, Dict
 from nglview.component import ComponentViewer
-import nglview as nv
 from pathlib import Path
 
-class Molecule:
-    def __init__(self) -> None:
-        pass
-
-
-
-
-class Macromolecule(Molecule):
+class Macromolecule():
     """
     A macromolecule obtained from the WorldWide Protein Data Bank (searchable at www.rcsb.org)
     """
+    PDB_FILE_DOWNLOAD_URL = "https://files.rcsb.org/download/"
+
     def __init__(self, pdbid: str) -> None:
-        super().__init__()
         self.pdbid = pdbid
 
-    def show(self, existing_viewer: Union[ComponentViewer, None] = None) -> ComponentViewer:
+    def show(self, existing_viewer: Union[nglview.NGLWidget, None] = None) -> nglview.NGLWidget:
         if existing_viewer == None:
-            #existing_viewer = nv.NGLWidget()
-            return nv.show_pdbid(self.pdbid)
+            return nglview.show_pdbid(self.pdbid)
         else:
-            return existing_viewer.add_component(nv.adaptor.PdbIdStructure(self.pdbid))
+            existing_viewer.add_component(nglview.adaptor.PdbIdStructure(self.pdbid))
+            return existing_viewer
 
     def save(self, file_path: Union[str, Path]) -> Path:
-        pdbl = PDBList()
-        file_out = pdbl.retrieve_pdb_file(pdb_code=self.pdbid, pdir=file_path, file_format='pdb')
-        return Path(file_out)
+        request_response = requests.get(f"{self.PDB_FILE_DOWNLOAD_URL}{self.pdbid}.pdb")
+        with open(file_path, "w") as f:
+            f.write(str(request_response.content))
+        return Path(file_path)
 
 
-
-class ChemicalMolecule(Molecule):
+class ChemicalMolecule():
     """
     A small chemical molecule from the ChemBL database (searchable at www.ebi.ac.uk/chembl
     """
     def __init__(self, chemblid: str) -> None:
-        super().__init__()
         self.chemblid = chemblid
         self.compounds_api = self.get_compounds_api()
         self.mol_data = self.get_mol_data(chemblid)
@@ -59,16 +51,15 @@ class ChemicalMolecule(Molecule):
         _ = AllChem.EmbedMultipleConfs(mol, useExpTorsionAnglePrefs=True, useBasicKnowledge=True)
         return mol
 
-    def show(self, existing_viewer: Union[ComponentViewer, None] = None) -> ComponentViewer:
+    def show(self, existing_viewer: Union[nglview.NGLWidget, None] = None) -> nglview.NGLWidget:
         if existing_viewer == None:
-            #existing_viewer = nv.NGLWidget()
-            return nv.show_rdkit(self.conformer)
+            return nglview.show_rdkit(self.conformer)
         else:
-            return existing_viewer.add_component(nv.adaptor.RdkitStructure(self.conformer))
+            existing_viewer.add_component(nglview.adaptor.RdkitStructure(self.conformer))
+            return existing_viewer
 
     def save(self, file_path: Union[str, Path]) -> Path:
         with Chem.SDWriter(file_path) as writer:
             for cid in range(self.conformer.GetNumConformers()):
                 writer.write(self.conformer, confId=cid)
-
         return Path(file_path)

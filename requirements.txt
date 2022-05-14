@@ -3,3 +3,4 @@ rdkit-pypi
 typing
 nglview
 pathlib
+requests
