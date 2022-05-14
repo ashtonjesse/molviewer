@@ -20,7 +20,8 @@ def test_show_macromol_no_existing_viewer(protease):
     assert isinstance(viewer, nglview.NGLWidget)
 
 def test_show_macromol_wrong_existing_viewer(protease):
-    viewer = protease.show('viewer')
+    viewer = protease.show(
+        'an argument which is not of type nglview.NGLWidget')
     assert viewer is None
 
 def test_save_macromol_correct_file_path(protease):
@@ -58,7 +59,8 @@ def test_show_chemmol_no_existing_viewer(lopinavir):
     assert isinstance(viewer, nglview.NGLWidget)
 
 def test_show_chemmol_wrong_existing_viewer(lopinavir):
-    viewer = lopinavir.show('viewer')
+    viewer = lopinavir.show(
+        'an argument which is not of type nglview.NGLWidget')
     assert viewer is None
 
 def test_save_chemmol_correct_file_path(lopinavir):

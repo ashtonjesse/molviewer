@@ -4,3 +4,9 @@ typing
 nglview
 pathlib
 requests
+flake8
+pytest
+mypy
+pylint
+build
+twine

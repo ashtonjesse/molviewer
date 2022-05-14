@@ -1,15 +1,18 @@
 name: ci_cd_workflow
 
-on: [push]
+on:
+  push:
+  branches: [ master ]
 
 jobs:
-  build:
+  build-and-publish:
+    name: Build and publish Python distribution
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: ["3.8", "3.9", "3.10"]
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@master
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
       with:
