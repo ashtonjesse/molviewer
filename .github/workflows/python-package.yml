@@ -35,11 +35,6 @@ jobs:
     - name: Test with pylint
       run: |
         pylint $(find . -name "*.py" -not -path "./tests/*" | xargs) --extension-pkg-whitelist=rdkit --disable=E1101
-    - name: Mypy Check
-      uses: jpetrucciani/mypy-check@0.930
-      with:
-        path: '.\src\molviewer\'
-        mypy_flags: '--install-types --non-interactive'
     - name: Test with pytest
       run: |
         pytest
