@@ -6,7 +6,7 @@ Macromolecule: a molecule from the www.rcsb.org database.
 Chemicalmolecule: a molecule from the www.ebi.ac.uk/chembl database.
 
 """
-from typing import Union, List, Dict
+from typing import Union
 from pathlib import Path
 
 import chembl_webresource_client.query_set
