@@ -34,10 +34,10 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pylint
       run: |
-        pylint .\src\ --extension-pkg-whitelist=rdkit --disable=E1101
+        pylint .\src\molviewer\ --extension-pkg-whitelist=rdkit --disable=E1101
     - name: Test with mypy
       run: |
-        mypy --install-types --non-interactive .\src\
+        mypy --install-types --non-interactive .\src\molviewer\
     - name: Test with pytest
       run: |
         pytest .\tests\
