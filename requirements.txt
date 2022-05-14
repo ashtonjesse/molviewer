@@ -9,4 +9,3 @@ pytest
 mypy
 pylint
 build
-twine
