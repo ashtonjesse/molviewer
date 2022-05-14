@@ -13,6 +13,6 @@ jobs:
         uses: actions/checkout@v2
       - name: Run Mypy
         uses: jashparekh/mypy-action@v2
-          with:
-            path: '.\src\molviewer\'
+        with:
+          path: '.\src\molviewer\'
 
