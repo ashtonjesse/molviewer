@@ -14,5 +14,5 @@ jobs:
       - name: Run Mypy
         uses: jpetrucciani/mypy-check@master
         with:
-          path: '.\src\molviewer\'
+          path: '.'
 
