@@ -34,7 +34,8 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pylint
       run: |
-        pylint $(find . -name "*.py" | xargs) --extension-pkg-whitelist=rdkit --disable=E1101
+        pylint $(find . -name "*.py" -not -path "./tests/*" | xargs) 
+        --extension-pkg-whitelist=rdkit --disable=E1101
     - name: Mypy Check
       uses: jpetrucciani/mypy-check@0.930
       with:
