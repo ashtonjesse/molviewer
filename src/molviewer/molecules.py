@@ -8,6 +8,8 @@ Chemicalmolecule: a molecule from the www.ebi.ac.uk/chembl database.
 """
 from typing import Union, List, Dict
 from pathlib import Path
+
+import chembl_webresource_client.query_set
 from rdkit import Chem  # type: ignore
 from rdkit.Chem import AllChem  # type: ignore
 from chembl_webresource_client.new_client import new_client  # type: ignore
@@ -118,10 +120,10 @@ class ChemicalMolecule():
 
         """
         self.chemblid = chemblid
-        self.mol_data = self.__get_mol_data()  # type: List[Dict]
-        self.conformer = self.__get_conformer()  # type: Chem.rdchem.Mol
+        self.mol_data = self.__get_mol_data()
+        self.conformer = self.__get_conformer()
 
-    def __get_mol_data(self) -> List[Dict]:
+    def __get_mol_data(self) -> chembl_webresource_client.query_set.QuerySet:
         """ Get the Chemicalmolecule structure from the ChEMBL database
         using the chembl_webresource_client.new_client.molecule API.
 
@@ -130,6 +132,7 @@ class ChemicalMolecule():
             'molecule_structures' information.
 
         """
+
         return new_client.molecule.filter(chembl_id=self.chemblid).only(
             ['molecule_chembl_id', 'molecule_structures'])
 
