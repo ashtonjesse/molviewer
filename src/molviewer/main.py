@@ -1,4 +1,5 @@
-from molecules import ChemicalMolecule, Macromolecule
+from molecules import ChemicalMolecule, Macromolecule # type: ignore
+
 protease = Macromolecule(pdbid="6LU7")
 lopinavir = ChemicalMolecule(chemblid="CHEMBL729")
 viewer = protease.show()
