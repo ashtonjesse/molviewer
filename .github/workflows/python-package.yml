@@ -45,7 +45,7 @@ jobs:
       run: |
         python -m build
     - name: Publish distribution to Test PyPI
-        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
+        if: ${{github.event_name == 'push' && startsWith(github.ref, 'refs/tags')}}
         uses: pypa/gh-action-pypi-publish@release/v0.0.9
         with:
           password: ${{ secrets.test_pypi_password }}
