@@ -31,8 +31,8 @@ def test_show_macromol_wrong_existing_viewer(protease):
 
 
 def test_save_macromol_correct_file_path(protease):
-    file_path = protease.save(".\\6LU7.pdb")
-    assert file_path == Path(".\\6LU7.pdb")
+    file_path = protease.save(".\\tests\\6LU7.pdb")
+    assert file_path == Path(".\\tests\\6LU7.pdb")
 
 
 def test_save_macromol_incorrect_file_path(protease):
@@ -79,8 +79,8 @@ def test_show_chemmol_wrong_existing_viewer(lopinavir):
 
 
 def test_save_chemmol_correct_file_path(lopinavir):
-    file_path = lopinavir.save(".\\CHEMBL729.sdf")
-    assert file_path == Path(".\\CHEMBL729.sdf")
+    file_path = lopinavir.save(".\\tests\\CHEMBL729.sdf")
+    assert file_path == Path(".\\tests\\CHEMBL729.sdf")
 
 
 def test_save_chemmol_incorrect_file_path(lopinavir):

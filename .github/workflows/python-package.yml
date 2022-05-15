@@ -37,7 +37,11 @@ jobs:
         pylint $(find . -name "*.py" -not -path "./tests/*" | xargs) --extension-pkg-whitelist=rdkit --disable=E1101
     - name: Test with pytest
       run: |
-        pytest
+        pytest --cov=src.molviewer --cov-report xml:coverage.xml
+    - name: Codecov
+      uses: codecov/codecov-action@v3.1.0
+      with:
+        files: ./coverage.xml
         
     
 
