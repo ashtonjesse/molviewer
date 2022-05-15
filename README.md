@@ -3,9 +3,9 @@
 *A Python package for molecular data retrieval and visualisation.*
 
 [![Source](https://img.shields.io/badge/source-GitHub-303030.svg?maxAge=3600&style=flat-square)](https://github.com/ashtonjesse/molviewer)
-[![Build](https://img.shields.io/github/workflow/status/althonos/moclo/Test?style=flat-square&maxAge=3600)](https://github.com/ashtonjesse/molviewer/actions)
-[![Codecov](https://img.shields.io/codecov/c/github/althonos/moclo/master.svg?style=flat-square&maxAge=600)](https://app.codecov.io/gh/ashtonjesse/molviewer/)
-[![License](https://img.shields.io/pypi/l/moclo.svg?style=flat-square&maxAge=300)](https://choosealicense.com/licenses/mit/)
+[![Build](https://github.com/ashtonjesse/molviewer/actions/workflows/python-package.yml/badge.svg)](https://github.com/ashtonjesse/molviewer/actions)
+[![codecov](https://codecov.io/gh/ashtonjesse/molviewer/branch/master/graph/badge.svg?token=DP9RT8XBMI)](https://codecov.io/gh/ashtonjesse/molviewer)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## 🔩 Core module
 
