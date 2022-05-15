@@ -128,15 +128,15 @@ class ChemicalMolecule():
         using the chembl_webresource_client.new_client.molecule API.
 
         :return:
-            A List[Dict] containing the 'molecule_chembl_id' and
-            'molecule_structures' information.
+            A chembl_webresource_client.query_set.QuerySet containing the
+            'molecule_chembl_id' and 'molecule_structures' information.
 
         """
 
         return new_client.molecule.filter(chembl_id=self.chemblid).only(
             ['molecule_chembl_id', 'molecule_structures'])
 
-    def __get_conformer(self) -> Chem.rdchem.Mol:
+    def __get_conformer(self) -> Union[Chem.rdchem.Mol, None]:
         """ Get the 3D conformer molecule structure from the 2D
         structure specified in the 'canonical_smiles' field of self.mol_data.
 
@@ -144,16 +144,20 @@ class ChemicalMolecule():
             A 3D conformer
 
         """
-        mol = Chem.AddHs(
-            Chem.MolFromSmiles(
-                self.mol_data[0]['molecule_structures']['canonical_smiles'])
-            )  # type: Chem.rdchem.Mol
-        _ = AllChem.EmbedMultipleConfs(mol, useExpTorsionAnglePrefs=True,
-                                       useBasicKnowledge=True)
+        try:
+            mol = Chem.AddHs(
+                Chem.MolFromSmiles(
+                    self.mol_data[0]['molecule_structures']['canonical_smiles']
+                ))  # type: Chem.rdchem.Mol
+            _ = AllChem.EmbedMultipleConfs(mol, useExpTorsionAnglePrefs=True,
+                                           useBasicKnowledge=True)
+        except (TypeError, KeyError):
+            print("No SMILES structure is available for this chemblid.")
+            mol = None
         return mol
 
     def show(self, existing_viewer: Union[nglview.NGLWidget, None] = None
-             ) -> nglview.NGLWidget:
+             ) -> Union[nglview.NGLWidget, None]:
         """ Display the Chemicalmolecule 3D structure inside a
         nglview.NGLWidget viewer in a Jupyter notebook.
 
@@ -168,19 +172,23 @@ class ChemicalMolecule():
             An nglview.NGLWidget viewer.
 
         """
-        if existing_viewer is None:
-            existing_viewer = nglview.show_rdkit(
-                self.conformer)
-        elif (existing_viewer is not None and
-              isinstance(existing_viewer, nglview.NGLWidget)):
-            existing_viewer.add_component(
-                nglview.adaptor.RdkitStructure(self.conformer))
+        if self.conformer is not None:
+            if existing_viewer is None:
+                existing_viewer = nglview.show_rdkit(
+                    self.conformer)
+            elif (existing_viewer is not None and
+                  isinstance(existing_viewer, nglview.NGLWidget)):
+                existing_viewer.add_component(
+                    nglview.adaptor.RdkitStructure(self.conformer))
+            else:
+                existing_viewer = None
         else:
-            existing_viewer = None
+            print("No 3D conformer can be generated for this chemblid as no "
+                  "SMILES structure is available.")
         return existing_viewer
 
     def save(self, file_path: Union[str, Path]) -> Path:
-        """ Save the Chemicalmolecule 3D structure using the .sdf file format.
+        """ Save the ChemicalMolecule 3D structure using the .sdf file format.
 
         :param file_path:
             The path to be used when saving the file.
@@ -188,10 +196,14 @@ class ChemicalMolecule():
             The path to the saved file.
 
         """
-        try:
-            with Chem.SDWriter(file_path) as writer:
-                for cid in range(self.conformer.GetNumConformers()):
-                    writer.write(self.conformer, confId=cid)
-        except (FileNotFoundError, OSError):
-            print("File error: File path does not exist.")
+        if self.conformer is not None:
+            try:
+                with Chem.SDWriter(file_path) as writer:
+                    for cid in range(self.conformer.GetNumConformers()):
+                        writer.write(self.conformer, confId=cid)
+            except (FileNotFoundError, OSError):
+                print("File error: File path does not exist.")
+        else:
+            print("This ChemicalMolecule cannot be saved as no SMILES "
+                  "structure is available for this chemblid.")
         return Path(file_path)

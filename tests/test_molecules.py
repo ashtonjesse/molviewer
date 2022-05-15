@@ -86,3 +86,21 @@ def test_save_chemmol_correct_file_path(lopinavir):
 def test_save_chemmol_incorrect_file_path(lopinavir):
     file_path = lopinavir.save(".\\nofolder\\CHEMBL729.sdf")
     assert file_path == Path(".\\nofolder\\CHEMBL729.sdf")
+
+@pytest.fixture()
+def erbB():
+    return ChemicalMolecule(chemblid="CHEMBL3848")
+
+
+def test_chemblid_with_no_smiles(erbB):
+    assert erbB.conformer is None
+
+
+def test_show_chemblid_with_no_smiles(erbB):
+    viewer = erbB.show()
+    assert viewer is None
+
+
+def test_save_chemblid_with_no_smiles(erbB):
+    file_path = erbB.save(".\\tests\\CHEMBL3848.sdf")
+    assert file_path == Path(".\\tests\\CHEMBL3848.sdf")
