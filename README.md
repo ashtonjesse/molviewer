@@ -35,11 +35,10 @@ If loading scripts is disabled then first run this command in the terminal:
 ```python
 Set-ExecutionPolicy Unrestricted -Scope Process
 ```
-Then install the `molviewer` package and `Jupyter Notebook`:
+Then install the `molviewer` package:
 ```python
 py -m pip install -i https://test.pypi.org/pypi/ --extra-index-url 
 https://pypi.org/simple molviewer==0.0.11
-py -m pip install notebook
 ```
 Run `Jupyter` with the following command:
 ```python
