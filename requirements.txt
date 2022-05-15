@@ -6,5 +6,6 @@ pathlib
 requests
 flake8
 pytest
+pytest-cov
 mypy
 pylint
