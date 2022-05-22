@@ -24,10 +24,10 @@ Jupyter Notebook and a `save` method for saving molecule data to file.
 whereas 3D conformers are generated for the `ChemicalMolecule` class using 
 methods available in the [`rdkit`](https://www.rdkit.org/) Python package. 
 
-## ⚡ Installation instructions
+## ⚡ Installation instructions (for Windows)
 
-Create a virtual environment and activate it using the following command in 
-the terminal:
+Create a virtual environment and activate it using the 
+following command in the terminal:
 ```python
 .\Scripts\activate
 ```
