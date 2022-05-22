@@ -38,7 +38,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pylint
       run: |
-        if [matrix.os == 'windows-latest']; then
+        if matrix.os == 'windows-latest'; then
           pylint $(find . -name "*.py" -not -path ".\tests\*" | xargs) --extension-pkg-whitelist=rdkit --disable=E1101 --min-public-methods=0
         else
           pylint $(find . -name "*.py" -not -path "./tests/*" | xargs) --extension-pkg-whitelist=rdkit --disable=E1101 --min-public-methods=0
