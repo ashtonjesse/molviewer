@@ -39,7 +39,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pylint
       run: |
-        pylint $(find . -name "*.py" -not -path "./tests/*" | xargs) --extension-pkg-whitelist=rdkit --disable=E1101
+        pylint $(find . -name "*.py" -not -path "./tests/*" | xargs) --extension-pkg-whitelist=rdkit --disable=E1101 --min-public-methods=0
     - name: Test with pytest
       run: |
         pytest --cov=src.molviewer --cov-report xml:coverage.xml --capture=no

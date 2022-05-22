@@ -48,7 +48,7 @@ class Molecule:
             existing_viewer.add_component(self.structure)
         return existing_viewer
 
-    
+
 class Macromolecule(Molecule):
 
     """A macromolecule obtained from the WorldWide Protein Data Bank (
@@ -118,7 +118,7 @@ class ChemicalMolecule(Molecule):
         """ Get the Chemicalmolecule structure from the ChEMBL database
         using the chembl_webresource_client.new_client.molecule API.
 
-        :return: A chembl_webresource_client.query_set.QuerySet containing  
+        :return: A chembl_webresource_client.query_set.QuerySet containing
             the 'molecule_chembl_id' and 'molecule_structures' information.
 
         """
@@ -140,7 +140,7 @@ class ChemicalMolecule(Molecule):
                     self.mol_data[0]['molecule_structures']['canonical_smiles']
                 ))
             AllChem.EmbedMultipleConfs(mol, useExpTorsionAnglePrefs=True,
-                                           useBasicKnowledge=True)
+                                       useBasicKnowledge=True)
         except (TypeError, KeyError):
             print("No SMILES structure is available for this chemblid.")
             mol = None
