@@ -38,7 +38,7 @@ Set-ExecutionPolicy Unrestricted -Scope Process
 Then install the `molviewer` package:
 ```python
 py -m pip install -i https://test.pypi.org/pypi/ --extra-index-url 
-https://pypi.org/simple molviewer==0.0.12
+https://pypi.org/simple molviewer==0.0.13
 ```
 Run `Jupyter` with the following command:
 ```python

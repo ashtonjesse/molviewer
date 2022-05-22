@@ -27,17 +27,17 @@ def test_show_macromol_no_existing_viewer(protease):
 def test_show_macromol_wrong_existing_viewer(protease):
     viewer = protease.show(
         'an argument which is not of type nglview.NGLWidget')
-    assert viewer is None
+    assert isinstance(viewer, str)
 
 
 def test_save_macromol_correct_file_path(protease):
-    file_path = protease.save(".\\tests\\6LU7.pdb")
-    assert file_path == Path(".\\tests\\6LU7.pdb")
+    file_path = protease.save(Path.cwd().joinpath("tests","6LU7.pdb"))
+    assert file_path.is_file()
 
 
 def test_save_macromol_incorrect_file_path(protease):
-    file_path = protease.save(".\\nofolder\\6LU7.pdb")
-    assert file_path == Path(".\\nofolder\\6LU7.pdb")
+    file_path = protease.save(Path.cwd().joinpath("nofolder","6LU7.pdb"))
+    assert not file_path.is_file()
 
 
 @pytest.fixture()
@@ -75,17 +75,17 @@ def test_show_chemmol_no_existing_viewer(lopinavir):
 def test_show_chemmol_wrong_existing_viewer(lopinavir):
     viewer = lopinavir.show(
         'an argument which is not of type nglview.NGLWidget')
-    assert viewer is None
+    assert isinstance(viewer, str)
 
 
 def test_save_chemmol_correct_file_path(lopinavir):
-    file_path = lopinavir.save(".\\tests\\CHEMBL729.sdf")
-    assert file_path == Path(".\\tests\\CHEMBL729.sdf")
+    file_path = lopinavir.save(Path.cwd().joinpath("tests","CHEMBL729.sdf"))
+    assert file_path.is_file()
 
 
 def test_save_chemmol_incorrect_file_path(lopinavir):
-    file_path = lopinavir.save(".\\nofolder\\CHEMBL729.sdf")
-    assert file_path == Path(".\\nofolder\\CHEMBL729.sdf")
+    file_path = lopinavir.save(Path.cwd().joinpath("nofolder","CHEMBL729.sdf"))
+    assert not file_path.is_file()
 
 @pytest.fixture()
 def erbB():
@@ -98,9 +98,9 @@ def test_chemblid_with_no_smiles(erbB):
 
 def test_show_chemblid_with_no_smiles(erbB):
     viewer = erbB.show()
-    assert viewer is None
+    assert isinstance(viewer, nglview.NGLWidget)
 
 
 def test_save_chemblid_with_no_smiles(erbB):
-    file_path = erbB.save(".\\tests\\CHEMBL3848.sdf")
-    assert file_path == Path(".\\tests\\CHEMBL3848.sdf")
+    file_path = erbB.save(Path.cwd().joinpath("tests","CHEMBL3848.sdf"))
+    assert not file_path.is_file()
