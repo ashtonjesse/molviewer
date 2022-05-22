@@ -42,7 +42,7 @@ class Molecule:
 
         """
         if existing_viewer is None:
-            existing_viewer: nglview.NGLWidget = nglview.NGLWidget()
+            existing_viewer = nglview.NGLWidget()
         if isinstance(existing_viewer,
                       nglview.NGLWidget) and self.structure is not None:
             existing_viewer.add_component(self.structure)
