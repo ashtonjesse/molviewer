@@ -2,5 +2,5 @@
 Lib\
 Scripts\
 dist\
-docs\
-.\pyvenv.cfg
+/docs/build/
+/pyvenv.cfg
