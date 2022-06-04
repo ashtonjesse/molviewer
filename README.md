@@ -6,6 +6,8 @@
 [![Build](https://github.com/ashtonjesse/molviewer/actions/workflows/python-package.yml/badge.svg)](https://github.com/ashtonjesse/molviewer/actions)
 [![codecov](https://codecov.io/gh/ashtonjesse/molviewer/branch/master/graph/badge.svg?token=DP9RT8XBMI)](https://codecov.io/gh/ashtonjesse/molviewer)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![readthedocs](https://readthedocs.org/projects/molviewer/badge/?version=latest)]
+(https://molviewer.readthedocs.io/en/latest/index.html)
 
 ## 🔩 Core module
 
@@ -24,7 +26,7 @@ Jupyter Notebook and a `save` method for saving molecule data to file.
 whereas 3D conformers are generated for the `ChemicalMolecule` class using 
 methods available in the [`rdkit`](https://www.rdkit.org/) Python package. 
 
-## ⚡ Installation instructions (for Windows)
+## ⚡ Quickstart instructions (for Windows)
 
 Create a virtual environment and activate it using the 
 following command in the terminal:
@@ -48,6 +50,3 @@ Create a new `notebook` and import the `molviewer` package:
 ```python
 from molviewer.molecules import ChemicalMolecule, Macromolecule
 ```
-    
-## 💾 A note on saving .pdb files
-While the PDBList class of the Biopython package can retrieve .pdb files from the www.rcsb.org ftp server, these files are retrieved with the '.ent' extension. Instead, we opted to retrieve .pdb files directly from 'https://files.rcsb.org/download/' as these have the correct '.pdb' extension. Hence the final release of this package does not include Biopython in its dependencies.  
