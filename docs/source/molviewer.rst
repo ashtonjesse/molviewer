@@ -7,7 +7,7 @@ Submodules
 molviewer.molecules module
 --------------------------
 
-.. automodule:: src.molviewer.molecules
+.. automodule:: molviewer.molecules
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ molviewer.molecules module
 Module contents
 ---------------
 
-.. automodule:: src.molviewer
+.. automodule:: molviewer
    :members:
    :undoc-members:
    :show-inheritance:
