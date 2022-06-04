@@ -17,11 +17,14 @@ the molecular information to file. In the case of :class:`ChemicalMolecule`, 2D
 SMILES structure is converted in to a 3D conformer using methods
 available in the `rdkit <https://www.rdkit.org/>`_ Python package.
 
-The package is built using Python 3.8+ and implements typing
-conventions according to PEP484 and PEP526.
+The package is platform agnostic and is built using Python 3.8+. It implements
+typing conventions according to PEP484 and PEP526, and it was written following
+the principles of test-driven development so comes with test suite.
 
 Motivation
 **********
 
 By providing methods for retrieving and visualizing the 3D structure of
-molecules, we enable detailed examination of how molecules interact.
+molecules, we enable detailed examination of how molecules interact. This
+functionality could, for example, be important for assessing the expected
+function of drugs or ligands, or macromolecule mutations.
