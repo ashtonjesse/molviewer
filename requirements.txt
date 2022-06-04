@@ -9,7 +9,3 @@ pytest
 pytest-cov
 mypy
 pylint
-
-# sphinx related
-sphinx-autodoc-typehints
-sphinx-rtd-theme
