@@ -6,8 +6,8 @@
 [![Build](https://github.com/ashtonjesse/molviewer/actions/workflows/python-package.yml/badge.svg)](https://github.com/ashtonjesse/molviewer/actions)
 [![codecov](https://codecov.io/gh/ashtonjesse/molviewer/branch/master/graph/badge.svg?token=DP9RT8XBMI)](https://codecov.io/gh/ashtonjesse/molviewer)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![readthedocs](https://readthedocs.org/projects/molviewer/badge/?
-version=latest)](https://molviewer.readthedocs.io/en/latest/index.html)
+[![readthedocs](https://readthedocs.org/projects/molviewer/badge/?version=latest)](https://molviewer.readthedocs.io/en/latest/index.html)
+
 
 ## 🔩 Core module
 
