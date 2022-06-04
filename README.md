@@ -17,7 +17,7 @@ which retrieve molecular data from the [rcsb](https://www.rcsb.org) and
 [ChEMBL](https://www.ebi.ac.uk/chembl/) databases, respectively. The 
 package is intended to be used in a Jupyter Notebook. Users can create class
 instances by specifying either a protein data bank id (for `Macromolecule`) 
-or a chembl id (for `ChemicalMolecule`).
+or a chembl id (for `ChemicalMolecule`). 
 Both 
 classes expose a `show` method for displaying 3D molecule models in a 
 Jupyter Notebook and a `save` method for saving molecule data to file. 
